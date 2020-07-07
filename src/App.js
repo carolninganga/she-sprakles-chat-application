@@ -24,6 +24,7 @@ class App extends Component {
           default:
             break;
     }
+  }
 
     constructor(){
       super();
@@ -50,12 +51,29 @@ class App extends Component {
       })
     }
       render(){
-        return()
+        return this.state.loading === true ? (
+          <div className="spinner-border text-success" role= 'status'>
+            <span className = "sr-only"> Loading....</span>
+          </div>
+
+        ): (
+          <Router>
+            <ToastContainer
+            autoClose = {2000}
+            hideProgressBar = {true}
+            position = {toast.POSITION.BOTTOM_CENTER}
+            />
+            <Switch>
+              <Route
+              exact
+              path = "/"
+              render = { props => <Home {...props}/>}/>
+            </Switch>
+
+          </Router>
+        )
       }
     }
-
-  }
-}
 
 
 
