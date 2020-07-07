@@ -3,22 +3,26 @@ import './Footer.css';
 
 class Footer extends Component {
     Copyright=()=>{
+        return(
         <h2 variant="body2" color="textSecondary" align="center">
             {'Copyright @'}
             {'Caroline'}
             {new Date().getFullYear()}
             {'.'}
         </h2>
+        )
     }
 
 
     render() {
         return (
-            <div>
-                
+            <Footer>
+                <div className="footer 1-box is-center">
+                    {this.Copyright()}    
             </div>
+            </Footer>
         )
     }
 }
 
-export default
+export default Footer;
