@@ -7,7 +7,9 @@ import {
 } from 'react-router-dom';
 import './App.css';
 import Home from './Pages/Home/Home';
+import Profile from './Pages/Profile';
 import Chat from './Pages/Chat/Chat';
+import Login from './Pages/Login/Login';
 import Signup from './Pages/Login/Login';
 import firebase from './Services/firebase';
 import { toast, ToastContainer } from 'react-toastify';
@@ -68,12 +70,27 @@ class App extends Component {
               exact
               path = "/"
               render = { props => <Home {...props}/>}/>
-            </Switch>
 
+            <Route 
+            path = "/login"
+            render = {props => <Login showToast={this.showToast}{...props}/>}
+            />
+            <Route 
+            path = "/profile"
+            render = {props => <Profile showToast={this.showToast}{...props}/>}
+            />
+            <Route 
+            path = "/signup"
+            render = {props => <Signup showToast={this.showToast}{...props}/>}
+            />
+            <Route 
+            path = "/chat"
+            render = {props => <Chat showToast={this.showToast}{...props}/>}
+            />
+            </Switch>
           </Router>
         )
       }
     }
 
-
-
+export default App;
