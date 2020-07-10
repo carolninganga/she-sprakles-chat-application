@@ -1,0 +1,16 @@
+.customform {
+    border-radius: 10px;
+    width: 50rem;
+    height: 110vh;
+    box-shadow: 0 80px 80px #808888;
+    margin: 5px;
+    justify-content: center;
+    border: none;
+    color: #ffffff;
+    padding: 10px 28px;
+    text-align: center;
+    font-size: 30px;
+    margin-top: 50px;
+    background-color: #f8f8f8;
+    margin-bottom: 40px;
+}
