@@ -5,18 +5,13 @@
     font-size: 24px;
     line-height: 1;
 }
-
 .header-login-signup .header-limiter nav {
     margin: 0;
     float: none;
 }
-
 .header-login-signup .header-limiter nav li a {
     font-size: 13px;
 }
-
 .header-login-signup .header-limiter ul {
     display: none;
 }
-
-

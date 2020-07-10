@@ -1,17 +1,17 @@
 import React from 'react';
-import 'Header.css';
+import './Header.css';
 import { Link } from 'react-router-dom';
-
-
 function Header() {
     return (
-        <header className="header-login-signu">
+        <header className="header-login-signup">
             <div className="header-limiter">
-                <h1><a href="/">Coding<span></span></a></h1>
+                <h1>
+                    <a href="/">Coding<span>Cafe</span></a>
+                </h1>
                 <nav>
-                    <Link to='/'> Home</Link>
-                    <a href className="selected"><Link to="/">About App></Link></a>
-                    <a href><Link to="/">Contact Us</Link></a>
+                    <Link to="/">Home</Link>
+                    <a href className="selected"><Link to="/">About App</Link></a>
+                    <a href><Link to="/">Contact Us</Link></a> 
                 </nav>
                 <ul>
                     <li><Link to="/login">Login</Link></li>
@@ -21,6 +21,4 @@ function Header() {
         </header>
     )
 }
-
-
 export default Header;
