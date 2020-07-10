@@ -6,7 +6,7 @@ const LoginString = {
     Password: 'image/',
     DOC: 'added',
     Description: 'mydescription',
-    FirebaseDocuments:'docid',
+    FirebaseDocumentId:'docid',
     UPLOAD_CHANGED: 'state_changed',
     PREFIX_IMAGE: 'image/',
     CurrentUserdocKey:''

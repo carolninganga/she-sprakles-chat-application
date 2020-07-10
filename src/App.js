@@ -11,7 +11,6 @@ import Profile from './Pages/Profile/Profile';
 import Chat from './Pages/Chat/Chat';
 import Login from './Pages/Login/Login';
 import Signup from './Pages/Signup/Signup';
-import firebase from './Services/firebase';
 import { toast, ToastContainer } from 'react-toastify';
 
 class App extends Component {
@@ -28,37 +27,8 @@ class App extends Component {
     }
   }
 
-    constructor(){
-      super();
-      this.state = {
-        authenticated: false,
-        loading: true
-      };
-    }
-
-    componentDidMount(){
-      firebase.auth().onAuthStateChanged(user => {
-        if(user){
-          this.setState({
-            authenticated : true,
-            loading: false
-          });
-
-        } else {
-          this.setState({
-            authenticated: false,
-            loading: false
-          });
-        }
-      })
-    }
       render(){
-        return this.state.loading === true ? (
-          <div className="spinner-border text-success" role= 'status'>
-            <span className = "sr-only"> Loading....</span>
-          </div>
-
-        ): (
+        return (
           <Router>
             <ToastContainer
             autoClose = {2000}

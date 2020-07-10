@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import "./Signup.css";
 import firebase from '../../Services/firebase';
 import {Card} from 'react-bootstrap';
+import LoginString from '../Login/LoginStrings';
 
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
@@ -18,7 +19,59 @@ export default class Signup extends Component {
             name:"",
             error: null
         }
+        this.handleChange = this.handleChange.bind(this)
+        this.handleSubmit = this.handleSubmit.bind(this)
     }
+
+    handleChange(event){
+        this.setState({
+            [event.target.name]:event.target.value
+        })
+    }
+
+    async handleSubmit(event){
+        const {name,password,email}=this.state;
+        event.preventDefault();
+        try{
+            firebase.auth().createUserWithEmailAndPassword(email, password)
+            .then(async result => {
+                firebase.firestore().collection('users')
+                .add({
+                    name,
+                    id:result.user.uid,
+                    email,
+                    password,
+                    URL:'',
+                    messages:[{notificationId:"",number:0}]
+                }).then((docRef)=>{
+                    localStorage.setItem(LoginString.ID,result.user.uid);
+                    localStorage.setItem(LoginString.Name, name)
+                    localStorage.setItem(LoginString.Email, email);
+                    localStorage.setItem(LoginString.Password, password);
+                    localStorage.setItem(LoginString.PhotoURL, "");
+                    localStorage.setItem(LoginString.UPLOAD_CHANGED, 'state_changed');
+                    localStorage.setItem(LoginString.Description, "");
+                    localStorage.setItem(LoginString.FirebaseDocumentID, docRef.id);
+                    this.setState({
+                        name:'',
+                        password:'',
+                        url:'',
+                    });
+                    this.props.history.push("/chat")
+
+                })
+                .catch((error) =>{
+                    console.error("Error adding document", error)
+                })
+            })
+        }
+        catch(error){
+            document.getElementById('1').innerHTML = "Error in signing up please try again"
+
+        }
+
+    }
+
     render(){
         const Signinsee = {
             display: 'flex',
@@ -107,6 +160,9 @@ export default class Signup extends Component {
                             <Link to="/login">
                                 Login In
                             </Link>
+                        </div>
+                        <div className="error">
+                            <p id='1' style={{color:'red'}}></p>
                         </div>
                     </form>
                 </Card>
