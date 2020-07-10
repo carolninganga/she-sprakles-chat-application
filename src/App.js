@@ -10,7 +10,7 @@ import Home from './Pages/Home/Home';
 import Profile from './Pages/Profile/Profile';
 import Chat from './Pages/Chat/Chat';
 import Login from './Pages/Login/Login';
-import Signup from './Pages/Login/Login';
+import Signup from './Pages/Signup/Signup';
 import firebase from './Services/firebase';
 import { toast, ToastContainer } from 'react-toastify';
 
