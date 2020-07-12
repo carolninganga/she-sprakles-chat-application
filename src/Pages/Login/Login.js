@@ -29,6 +29,50 @@ export default class Login extends Component {
             [event.target.name]:event.target.value
         })
     }
+
+    componentDidMount(){
+        if(localStorage.getItem(localStorage.ID)){
+            this.setState({isLoading: false}, ()=>{
+                this.setState({isLoading: false})
+                this.props.showToast(1, 'Login success')
+                this.props.history.push('./chat')
+            })
+        }else{
+            this.setState({isLoading:false})
+        }
+        }
+     async handleSubmit(event) {
+         event.preventDefault();
+         this.setState({error:""});
+
+         await firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
+         .then(async result => {
+             let user = result.user;
+             if(user){
+                 await firebase.firestore().collection('users')
+                 .where('id', "==", user.uid)
+                 .get()
+                 .then(function(querySnapShot){
+                     querySnapShot.forEach(function(doc){
+                         const currentdata = doc.data();
+                         localStorage.setItem(LoginString.FirebaseDocumentId, doc.id);
+                         localStorage.setItem(LoginString.ID, currentdata.id);
+                         localStorage.setItem(LoginString.Name, currentdata.name);
+                         localStorage.setItem(LoginString.Password, currentdata.password);
+                         localStorage.setItem(LoginString.PhotoURL, currentdata.URL);
+                         localStorage.setItem(LoginString.Description, currentdata.description)
+
+                     })
+                 })
+             }
+         })
+
+     }
+    
+
+
+
+
     render() {
         const paper = {
             display: 'flex',
